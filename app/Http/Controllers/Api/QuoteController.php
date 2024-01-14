@@ -3,38 +3,34 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Manager\QuoteManager;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class QuoteController
+ */
 class QuoteController extends Controller
 {
-    public function show(): JsonResponse
+    /**
+     * @param QuoteManager $quoteManager
+     * @return JsonResponse
+     * @throws GuzzleException
+     */
+    public function show(QuoteManager $quoteManager): JsonResponse
     {
-        return response()->json([
-            [
-                'quote' => 'The best preparation for tomorrow is doing your best today.',
-                'author' => 'H. Jackson Brown, Jr.',
-            ],
-            [
-                'quote' => 'The best preparation for tomorrow is doing your best today.',
-                'author' => 'H. Jackson Brown, Jr.',
-            ],
-            [
-                'quote' => 'The best preparation for tomorrow is doing your best today.',
-                'author' => 'H. Jackson Brown, Jr.',
-            ],
-            [
-                'quote' => 'The best preparation for tomorrow is doing your best today.',
-                'author' => 'H. Jackson Brown, Jr.',
-            ],
-            [
-                'quote' => 'The best preparation for tomorrow is doing your best today.',
-                'author' => 'H. Jackson Brown, Jr.',
-            ],
-        ]);
+        return response()->json($quoteManager->getQuotes(5));
     }
 
-    public function refresh()
+    /**
+     * @param QuoteManager $quoteManager
+     * @return JsonResponse
+     * @throws GuzzleException
+     */
+    public function refresh(QuoteManager $quoteManager): JsonResponse
     {
+        $quoteManager->refreshQuotes();
 
+        return response()->json(['status' => 'success']);
     }
 }
