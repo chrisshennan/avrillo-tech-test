@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ApiKeyValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware(ApiKeyValidation::class)
+    ->prefix('quotes')
+    ->group(function () {
+        Route::get('/show', 'App\Http\Controllers\Api\QuoteController@show');
+        Route::post('/refresh', 'App\Http\Controllers\Api\QuoteController@refresh');
+    }
+);
