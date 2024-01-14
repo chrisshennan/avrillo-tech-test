@@ -35,7 +35,7 @@ class QuoteManager
         // If it is a cold start i.e. we have no results, then refresh the quotes
         // This will have a performance hit as there is no cache to speed things up.
         if ($quoteCollection->count() == 0) {
-            $this->quoteService->refresh($limit);
+            $quoteCollection = $this->quoteService->refresh($limit);
         }
 
         return $quoteCollection->toArray();

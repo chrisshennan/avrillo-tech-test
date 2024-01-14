@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- *
+ * Class KanyeRestQuoteService
  */
 class KanyeRestQuoteService extends AbstractQuoteService
 {

@@ -7,7 +7,7 @@ use App\Http\Dto\Quote;
 /**
  * Class QuoteCollection
  */
-class QuoteCollection
+class QuoteCollection implements \Countable
 {
     /**
      * @var Quote[]
