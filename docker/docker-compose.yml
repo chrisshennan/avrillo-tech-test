@@ -1,0 +1,25 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 8888:80
+    volumes:
+      - ../:/app:cached
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      - tech-test
+
+  php:
+    image: ${PHP_IMAGE}
+    environment:
+      - PHP_IDE_CONFIG=serverName=${PHP_IDE_CONFIG_SERVER_NAME}
+    volumes:
+      - ../:/app:cached
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    networks:
+      - tech-test
+
+networks:
+  tech-test:
