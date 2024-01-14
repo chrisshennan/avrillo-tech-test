@@ -185,4 +185,7 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+
+    /* Custom app.* config values */
+    'api_key' => env('APP_API_KEY'),
 ];
